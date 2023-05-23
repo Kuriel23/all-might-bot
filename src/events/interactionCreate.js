@@ -8,7 +8,7 @@ module.exports = (client, interaction) => {
 	if (interaction.isChatInputCommand()) {
 		if (
 			interaction.member.roles.highest.comparePositionTo(
-				interaction.guild.me.roles.highest
+				interaction.guild.members.fetch(client.user.id).roles.highest
 			) > 0
 		) {
 			const command = client.commands.get(interaction.commandName);
