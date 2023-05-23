@@ -109,7 +109,7 @@ module.exports = async (client) => {
 					const cargo = vips.vip;
 
 					const person = client.guilds.cache
-						.get("736701720800919622")
+						.get("1107290930148548628")
 						.members.cache.get(vips._id);
 					if (person) person.roles.remove(cargo);
 					not.vipschedule.pull({ _id: vips._id });
