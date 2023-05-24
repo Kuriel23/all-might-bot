@@ -12,25 +12,23 @@ module.exports = {
     ),
   async execute(interaction, client) {
     const cargo = interaction.options.getRole("cargo");
+    const membrosComCargo = await cargo.members.filter((m) => !m.user.bot);
+    console.log(membrosComCargo);
 
-    const membrosComCargo = cargo.members.filter((m) => !m.user.bot);
-    const docFinal = await client.db.Users.find({})
-      .array()
-      .filter((doc) => doc.messages >= 0)
-      .filter((doc) => membrosComCargo.some((membro) => membro.id === doc._id));
+    const descriptions = await Promise.all(
+      membrosComCargo.map(async (membro) => {
+        const doc = await client.db.Users.findOne({ _id: membro.id });
+        if (!doc || doc.messages <= 0) return 0;
+        return `${membro.toString()} • ${membro.id} • ${doc.messages}`;
+      })
+    );
+
     interaction.reply({
       embeds: [
         new discord.EmbedBuilder()
           .setTitle("Resultado das Mensagens do cargo escolhido:")
           .setColor(client.cor)
-          .setDescription(
-            docFinal
-              .filter((doc) => doc.messages > 0)
-              .map((doc) => {
-                return `<@${doc._id}> • ${doc._id} • ${doc.messages}`;
-              })
-              .join("\n")
-          ),
+          .setDescription(descriptions.join("\n")),
       ],
     });
   },
