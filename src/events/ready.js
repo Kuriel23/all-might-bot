@@ -68,7 +68,7 @@ module.exports = async (client) => {
 		const docMessages = await client.db.Users.find({});
 		client.channels.cache.get("1109869305799131196").send({
 			embeds: [
-				discord
+				new discord
 					.EmbedBuilder()
 					.setTitle("Resultado das Parcerias de hoje:")
 					.setColor(client.cor)
@@ -83,7 +83,7 @@ module.exports = async (client) => {
 		});
 		client.channels.cache.get("1109869305799131196").send({
 			embeds: [
-				discord
+				new discord
 					.EmbedBuilder()
 					.setTitle("Resultado das Mensagens de hoje:")
 					.setColor(client.cor)

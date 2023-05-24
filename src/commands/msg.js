@@ -21,7 +21,7 @@ module.exports = {
 			);
 		interaction.reply({
 			embeds: [
-				discord
+				new discord
 					.EmbedBuilder()
 					.setTitle("Resultado das Mensagens do cargo escolhido:")
 					.setColor(client.cor)
